@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  /* 🎨 Color Palette */
+  
+
+  --spacing-xxs: 0.25rem; /* 4px */
+  --spacing-xs: 0.5rem; /* 8px */
+  --spacing-sm: 0.75rem; /* 12px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-xxl: 2.5rem; /* 40px */
+
+  /* 🔠 Typography */
+  --font-inter: "Inter", sans-serif;
+  --text-sm: 0.875rem; /* 14px */
+  --text-md: 1rem;     /* 16px */
+  --text-lg: 1.25rem;  /* 20px */
+  --text-xl: 1.5rem;   /* 24px */
+  --text-xxl: 2rem;    /* 32px */
+  --text-cl: 3rem;     /* 48px */
+
+  /*line height*/
+  --leading-line-height: 1.6;
+  /* 🎨 Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-xxl: 24px;
+
+  --shadow-sm: 0px 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0px 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0px 6px 16px rgba(0, 0, 0, 0.16);
+}
+@utility accent {
+  background-color: var(--accent);
+}
+
+@utility accent-light {
+  background-color:rgb(var(--accent-light))
+}
+@utility text-accent {
+  color: var(--accent);
+}
+@utility text-accent-light {
+  color: rgb(var(--accent-light));
+}
+@utility text-accent-dark {
+  color: var(--accent-dark);
+}
+@utility primary-bg{
+  background-color:var(--primary);
+}
+@utility primary-bg-dark{
+  background-color:var(--primary-dark);
+}
+@utility text {
+    color:var(--text)
+}
+@utility text-primary {
+  color:var(--primary)
+}
+@utility accent-light-dim{
+  background-color:rgba(var(--accent-light),0.2)
+}
+@utility linear90-bg{
+  background-image: linear-gradient(rgba(var(--accent-light),0.4), var(--primary))
+}
+@utility my-scroll-bar{
+  &::-webkit-scrollbar{
+    width: .45rem;
+    background:transparent;
+  }
+  &::-webkit-scrollbar-track{
+    background:transparent;
+
+  }
+  &::-webkit-scrollbar-thumb{
+    width: 100%;
+    background-color: rgba(var(--accent-light),0.7);
+    border-radius: var(--radius-lg);
+  }
+  &::-webkit-scrollbar-thumb:hover{
+  
+    background-color: rgb(var(--accent-light));
+ 
+  }
+}
+.light {
+  --accent: #6767f0;
+  --accent-light: 141, 141, 255;
+  --accent-dark: #4242c0;
+  --primary: #f5f5f5;
+  --primary-dark: #e0e0e0;
+  --bg-blur-color: #e0e0e0b3;
+  --text:#1c1c1c;
+}
+
+.dark {
+  --accent: #6767f0;
+  --accent-light: 141, 141, 255;
+  --accent-dark: #4242c0;
+  --primary: #1c1c1c;
+  --primary-dark: #111111;
+  --bg-blur-color: #111111b3;
+  --text:#f5f5f5;
+}
