@@ -4,6 +4,7 @@ import BentoContainer from "../../components/bentoGrid/bentoGridContainer";
 import Footer from "../../components/footer";
 import TitleBar from "../../components/titleBar";
 import University from "../../components/university";
+import heroImg from '../../assets/hero_image.png'
 import "./home.css"
 // landing Page
 const Home = () => {
@@ -24,7 +25,7 @@ const Home = () => {
           </div>
     <div className=" w-full flex justify-center mt-lg"><button className="shiny-cta">Get Started</button></div>
           <img
-            src="src\assets\hero_image.png"
+            src={heroImg}
             className="aspect-sqaure max-w-1/2 mx-auto my-lg"
           />
         </section>
