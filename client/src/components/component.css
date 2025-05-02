@@ -25,7 +25,7 @@ header .logo .logo-name {
 }
 
 /* active of a nav*/
-.active {
+/* .active {
   display: block;
   background-color: color-mix(
     in oklab,
@@ -33,7 +33,7 @@ header .logo .logo-name {
     #e0e0e000 70%
   );
   border-radius: var(--radius-md);
-}
+} */
 .navHover{
   position: relative;
 }

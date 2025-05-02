@@ -2,8 +2,6 @@
 
 @theme {
   /* 🎨 Color Palette */
-  
-
   --spacing-xxs: 0.25rem; /* 4px */
   --spacing-xs: 0.5rem; /* 8px */
   --spacing-sm: 0.75rem; /* 12px */
@@ -53,6 +51,10 @@
 @utility primary-bg{
   background-color:var(--primary);
 }
+@utility primary-bg-blur{
+  background-color:color-mix(in lab,var(--primary) 50%, transparent 50%);
+  backdrop-filter:blur(40px);
+}
 @utility primary-bg-dark{
   background-color:var(--primary-dark);
 }
@@ -88,8 +90,29 @@
  
   }
 }
+html {
+  font-size: 32px;
+}
+
+@media (max-width: 1440px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+}
 .light {
   --accent: #6767f0;
+ 
   --accent-light: 141, 141, 255;
   --accent-dark: #4242c0;
   --primary: #f5f5f5;

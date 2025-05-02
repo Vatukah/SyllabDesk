@@ -1,0 +1,17 @@
+.danger-action {
+    color: #f87171;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease;
+  }
+  
+  .danger-action:hover {
+    background-color: #ef44448a; /* red-500 */
+    color: white;
+  }
+  
+  .danger-action:focus {
+    outline: 2px solid #b91c1c; /* red-700 */
+    outline-offset: 2px;
+  }
+  

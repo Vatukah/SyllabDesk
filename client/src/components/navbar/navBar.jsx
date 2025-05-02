@@ -1,21 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { data, NavLink } from "react-router";
-import {
-  HomeIcon,
-  Squares2X2Icon,
-  BookOpenIcon,
-  DocumentTextIcon,
-  Cog6ToothIcon,
-  ArrowRightStartOnRectangleIcon,
- Bars3Icon
-} from "@heroicons/react/24/outline";
+import { data, NavLink ,useNavigate} from "react-router";
+
 
 import NavItem from "./navItem";
+import { useAuth } from "../../contexts/authContext/authProvider";
 import '../component.css';
 
 export default function Navbar() {
   const [isExpand, setIsExpand] = useState(true);
-  const navRef = useRef(null)
+ const navigate = useNavigate();
+ const {setUser} = useAuth();
+
+ const handleLogout=async()=>{
+  const response = await fetch('http://localhost:5008/logout',{method:'GET',credentials:"include"});
+  const logout = await response.json();
+  setUser(null)
+    navigate(logout.redirect);
+    
+}
 
   const navigationLinks = [
     {
@@ -50,15 +52,11 @@ export default function Navbar() {
       name: "Log Out",
       path: "/logout",
       icon: <ArrowRightStartOnRectangleIcon />,
+      action: handleLogout
     },
   ];
-  const handleHover=()=>{
-    setIsExpand(true);
-  }
-  const handleHoverLeave=()=>{
-    setIsExpand(false);
-  }
-
+ 
+  
 
   return (
     <nav className={`h-full ${isExpand?'w-[14rem]':'w-[3.65rem]'} px-2  pt-md  transition-[width] text `} data-expanded={isExpand} >
@@ -78,11 +76,12 @@ export default function Navbar() {
 
       <div className="flex flex-col gap-xxs ">
         {utility.map((link, index) => (
-          <NavLink to={link.path} key={index} className="navHover" data-content={link.name}>
+          <div  key={index} className="navHover" data-content={link.name} onClick={link.action}>
             
             <NavItem icon={link.icon} text={link.name} isExpand={isExpand} />
-          </NavLink>
+          </div>
         ))}
+        
       </div>
       </div>
     </nav>
