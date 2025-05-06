@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import illustration from "../../assets/reset_password.svg"; // ← Add a vector illustration to this path
-import "./resetPassword.css"; 
+import "./resetPassword.css";
+import { showInfo, toastWithServerMessage } from "../../services/toastify";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -18,9 +19,60 @@ export default function ResetPassword() {
     }
 
     setLoading(true);
+    try {
+      const hash = window.location.hash;
+      const params = new URLSearchParams(hash.slice(1));
 
-    
+      const accessToken = params.get("access_token");
+
+      const data = await toastWithServerMessage(fetch("http://localhost:5008/reset_password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ newPassword: password }),
+      }));
+
+    if(data){
+      showInfo("redirecting to Sign in page...");
+      setTimeout(()=>{
+        navigate('/auth/signin',{replace:true});
+      },[3000])
+    }
+
+    } catch (error) {
+      console.error(error)
+    }finally{
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    const params = new URLSearchParams(hash.slice(1));
+
+    const accessToken = params.get("access_token");
+    const refreshToken = params.get("refresh_token");
+
+    if (accessToken && refreshToken) {
+      console.log(accessToken);
+      console.log(refreshToken);
+      // Store both tokens
+      // localStorage.setItem("access_token", accessToken);
+      // localStorage.setItem("refresh_token", refreshToken);
+
+      // document.cookie = `access_token=${accessToken}; path=/; max-age=${
+      //   60 * 60
+      // }; secure; samesite=strict`;
+      // document.cookie = `refresh_token=${refreshToken}; path=/; max-age=${
+      //   60 * 60 * 24 * 30
+      // }; secure; samesite=strict`;
+
+      // // Clean URL
+      // window.history.replaceState(null, null, window.location.pathname);
+    }
+  }, []);
 
   return (
     <div className="syllabdesk-reset-container">

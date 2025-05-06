@@ -7,7 +7,7 @@ const dashboard = Router();
 
 
 dashboard.get('/',protect,async(req,res)=>{
-  const user = req.user;
+  const {user} = req.user;
 //  const { board, course, semester } = req.query;
 
 //   const { data, error } = await supabase
@@ -18,7 +18,8 @@ dashboard.get('/',protect,async(req,res)=>{
 //     .eq('semester', semester);
 
 //   if (error) return res.status(500).json({ error: error.message });
-  res.json({user:user});
+
+  res.json({user});
 })
 
 export default dashboard

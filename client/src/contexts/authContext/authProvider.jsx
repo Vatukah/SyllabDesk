@@ -1,58 +1,65 @@
-import { useContext, useEffect, useState } from "react";
-import authContext from "./auth";
+import { useContext, useEffect, useState, createContext } from "react";
+import authContext from "./auth.js";
+
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const getUser = async () => {
     try {
-      const response = await fetch("http://localhost:5008/dashboard", {
+      const response = await fetch("http://localhost:5008/session", {
         method: "GET",
         credentials: "include",
       });
 
-      if ([401, 500].includes(response.status) || !response) {
-        const error = await response.json();
+      if (!response.ok) {
+        
         setUser(null);
-        console.log(error)
+        setIsAdmin(false);
         return;
       }
 
-      const data = await response.json();
-      console.log(data);
-      setUser(data.user);
+      const {user} = await response.json();
+     
+      const role = user?.user_metadata?.role;
+      setUser(user);
+      setIsAdmin(role === "admin");
     } catch (error) {
+      console.error("AuthProvider Error:", error);
       setUser(null);
+      setIsAdmin(false);
     } finally {
       setLoading(false);
     }
-    // // Get the hash from the URL
-    // const hash = window.location.hash; // "#access_token=..."
-    // const params = new URLSearchParams(hash.slice(1));
-    // const token = params.get("access_token");
-
-    // if (token) {
-    //   // ✅ Store in localStorage
-    //   localStorage.setItem("access_token", token);
-
-    //   // ✅ Store in cookie (expires in 7 days)
-    //   document.cookie = `access_token=${token}; path=/; max-age=${
-    //     60 * 60 * 24 * 7
-    //   }; secure; samesite=strict`;
-
-    //   // ✅ Optional: Clean the URL
-    //   window.history.replaceState(null, null, window.location.pathname);
-    // }
   };
 
   useEffect(() => {
-    if (!user) {
-      getUser();
-    }
-  }, [user]);
+    getUser(); // fetch on mount once
+     // Periodically refresh session every 5 minutes (300 seconds)
+     const interval = setInterval(async () => {
+      try {
+        const response = await fetch("http://localhost:5008/auth/refresh", {
+          method: "GET",
+          credentials: "include", // Ensures cookies are sent with the request
+        });
+
+        if (response.ok) {
+          console.log("🔄 Session refreshed successfully");
+        } else {
+          console.error("❌ Failed to refresh session");
+        }
+      } catch (err) {
+        console.error("Error refreshing session:", err);
+      }
+    }, 5 * 60 * 1000); // Refresh every 5 minutes
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, []);
+
   return (
-    <authContext.Provider value={{ user, loading, setLoading, setUser }}>
+    <authContext.Provider value={{ user, isAdmin, loading, setUser, setLoading }}>
       {children}
     </authContext.Provider>
   );

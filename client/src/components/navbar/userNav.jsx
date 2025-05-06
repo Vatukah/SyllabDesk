@@ -13,7 +13,7 @@ import NavItem from "./navItem";
 import "../../styles/btn.css"
 export default function UserNav() {
   const { setIsRightSideBar } = useUtility();
-  const { user ,setUser} = useAuth();
+  const { user ,setUser,isAdmin} = useAuth();
   const navigate = useNavigate();
   const navigationLinks = [
     {
@@ -37,6 +37,15 @@ export default function UserNav() {
       icon: <DocumentTextIcon />,
     },
   ];
+
+  const protectedLink =[
+    {
+      name:"Admin Dashboard",
+      path:"/adminDashboard",
+      icon: <i className="fa-solid fa-user-tie"></i>,
+      action: ()=>{ navigate("/admin/dashboard")}
+    }
+  ]
 
   const handleLogout=async()=>{
     const response = await fetch('http://localhost:5008/logout',{method:'GET',credentials:"include"});
@@ -86,6 +95,8 @@ export default function UserNav() {
               <NavItem icon={link.icon} text={link.name} key={index} />
             </NavLink>
           ))}
+           
+            {isAdmin && protectedLink.map((link,index)=>( <NavItem icon={link.icon} text={link.name} key={index} action={link.action}/> ) )}
           <div
            
             className="danger-action"

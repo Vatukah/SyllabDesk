@@ -4,9 +4,21 @@ import TitleBar from "../../components/titleBar";
 import University from "../../components/university";
 import heroImg from "../../assets/hero_image.png";
 import "./home.css";
+import { showSuccess } from "../../services/toastify";
 // landing Page
 const Home = () => {
   const number = ["HNBGU", "GEU", "SDSU", "DU", "GEHU", "GEHU"];
+
+  const handleGetStarted=async()=>{
+       
+    const res = await fetch("http://localhost:5008/createAdmin",{
+      method:"get"
+    });
+     
+    const data = await res.json();
+
+    console.log(data);
+  }
   return (
     <>
       <section className="w-full relative overflow-hidden" id="heroSection">
@@ -21,7 +33,7 @@ const Home = () => {
           </p>
         </div>
         <div className=" w-full flex justify-center mt-lg">
-          <button className="shiny-cta">Get Started</button>
+          <button className="shiny-cta" >Get Started</button>
         </div>
         <img src={heroImg} className="aspect-sqaure max-w-1/2 mx-auto my-lg" />
       </section>

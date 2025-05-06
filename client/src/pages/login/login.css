@@ -195,6 +195,10 @@ img{
   display: none;
 }
 
+.disabled{
+  opacity: 0.5;
+}
+
 /* ===== MEDIA QUERIES =====*/
 @media screen and (min-width: 576px){
   .login__forms{

@@ -4,8 +4,10 @@ import Navbar from "../../components/navbar/navBar";
 import TitleBar from "../../components/titleBar";
 import "./dashboard.css";
 import Sidebar from "../../components/sidebar/sidebar";
+import { useAuth } from "../../contexts/authContext/authProvider";
 
 const Dashboard = () => {
+  
   useEffect(() => {
     const hash = window.location.hash;
     const params = new URLSearchParams(hash.slice(1));
@@ -28,11 +30,12 @@ const Dashboard = () => {
       // Clean URL
       window.history.replaceState(null, null, window.location.pathname);
     }
+   
   }, []);
   
   return (
     <div >
-     <h1 className="px-6">THIS DASHBOARD</h1>
+     <h1 className="px-6">dashboard</h1>
     </div>
   );
 };
