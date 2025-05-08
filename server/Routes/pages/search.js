@@ -3,9 +3,10 @@ import {supabaseService} from "../../services/supabaseClient.js";
 
 const search = Router();
 
-search.get('/',async (req,res)=>{
+search.get('/:subject',async (req,res)=>{
 
-const { query, topic } = req.query;
+const { topic } = req.query;
+const query = req.params.subject;
 
 if(!query || query.length ===0) return res.status(400).json({message:"invalid search"});
 

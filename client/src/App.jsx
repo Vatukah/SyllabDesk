@@ -30,12 +30,11 @@ function App() {
 
   return (
     <>
-    <MuiThemeProvider theme={choosenTheme=== 'light'?lightTheme:darkTheme}>
-      <CssBaseline/>
+    
       <Routes>
         <Route path="/" element={<Wrapper />}>
           <Route path="/" element={<Home />} />
-          <Route path="api/search" element={<SearchOutput/>}/>
+          <Route path="api/search/:subject" element={<SearchOutput/>}/>
           <Route
             path="dashboard"
             element={
@@ -60,7 +59,7 @@ function App() {
         <Route path="*" element={<h1> page not found!!!</h1>} />
       </Routes>
       <ToastContainer limit={3} theme={choosenTheme} />
-      </MuiThemeProvider>
+  
     </>
   );
 }

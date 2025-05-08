@@ -1,19 +1,21 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router";
+import { useSearchParams,useParams } from "react-router";
 import { useSearch } from "../../contexts/searchContext/searchProvider";
 export default function SearchOutput() {
   const { setSubject, setChapters, setTopics, setLoading } = useSearch();
 
   const [searchParams] = useSearchParams();
+  const {subject:subjectQuery} = useParams();
   const query = searchParams.get("query")?.toLowerCase();
-  const topic = searchParams.get("topic")?.toLowerCase();
+  const topic = searchParams.get("topic")?.toLowerCase(); 
+  console.log(subjectQuery)
 
   useEffect(() => {
     const search = async () => {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://localhost:5008/api/search?query=${query}`,
+          `http://localhost:5008/api/search/${subjectQuery}`,
           {
             method: "get",
           }

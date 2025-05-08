@@ -6,6 +6,7 @@ html, body {
   overflow: hidden; /* Prevent unwanted scroll */
  background-color: var(--primary-dark);
  color: var(--text);
+ font-family: 'Inter', sans-serif;
 
 }
 
