@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState, createContext } from "react";
-import authContext from "./auth.js";
+import { useContext, useEffect, useState } from "react";
+import { authContext } from "../allContexts.js";
 
 
 export default function AuthProvider({ children }) {

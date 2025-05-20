@@ -13,7 +13,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import NavItem from "./navItem";
-import { useAuth } from "../../contexts/authContext/authProvider";
+
 import "../component.css";
 
 export default function Navbar() {
@@ -32,7 +32,7 @@ export default function Navbar() {
     >
       {/* content navigation */}
       <Bars3Icon
-        className={`w-md ${isExpand ? "ml-auto" : "mx-auto"} cursor-pointer `}
+        className={`w-md ${isExpand ? "ml-auto mr-2" : "mx-auto"} cursor-pointer  `}
         onClick={() => setIsExpand(!isExpand)}
         title={isExpand ? "Close Menu" : "Expand Menu"}
       />

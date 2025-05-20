@@ -1,4 +1,4 @@
-import { supabaseService } from "../../services/supabaseClient.js";
+import supabase, { supabaseService } from "../../services/supabaseClient.js";
 import { Router } from "express";
 import { requireAdmin } from "../middleware/requireAdmin.js";
 
@@ -8,7 +8,7 @@ getAlluser.get("/users", requireAdmin, async (req, res) => {
   const {
     data,
     error,
-  } = await supabaseService.from("profiles").select("*");
+  } = await supabase.from('profiles').select('*');
 
   if (error) {
     return res.status(500).json({ error: "Failed to fetch users" });

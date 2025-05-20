@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { useUtility } from "../contexts/utilityContext/utilityProvider";
+import { useUtility } from "../contexts/providers/utilityProvider";
+import UserNav from "./navbar/userNav";
+import UserInfo from "./adminComponents/userInfo";
 
 export default function RightSideBar({ children }) {
-  const { isRightSideBar, rightNavRef, leftNavRef, setIsRightSideBar } =
+  const { isRightSideBar, rightNavRef, leftNavRef, setIsRightSideBar ,rightSideBarView} =
     useUtility();
 
   useEffect(() => {
@@ -27,12 +29,14 @@ export default function RightSideBar({ children }) {
     <div
       className={`${
         !isRightSideBar ? "w-0" : "w-[16rem] px-2 py-2"
-      } overflow-hidden transition-[width] primary-bg-blur rounded-tl-xxl ${
+      } overflow-hidden transition-[width]  rounded-tl-xl ${
         isRightSideBar ? "ml-2" : "ml-4"
-      }  `}
+      } 
+      ${rightSideBarView==="home"?"accent-light":"primary-bg"} `}
       ref={rightNavRef}
     >
-      {children}
+   
+      {rightSideBarView === "home"?<UserNav/>:<UserInfo/>}
     </div>
   );
 }

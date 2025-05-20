@@ -41,11 +41,17 @@ header .logo .logo-name {
   display: block;
   background-color: color-mix(
     in oklab,
-    rgb(var(--accent-light)) 20%,
-    #e0e0e000 80%
+    var(--accent) 40%,
+    #e0e0e000 60%
   );
   border-radius: var(--radius-md);
 }
+.active{
+  background-color: color-mix(
+    in oklab,
+    var(--accent) 40%,
+    #e0e0e000 60%
+  ); border-radius: var(--radius-md);}
 
 nav[data-expanded="false"] .navHover:hover::before{
  content: attr(data-content);

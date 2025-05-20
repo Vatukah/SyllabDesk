@@ -5,8 +5,8 @@ import TopRightBar from "./topRightBar";
 import CTA_btn from "./buttons/CTA_btn";
 import CTA_btn_light from "./buttons/CTA_btn_ligth";
 import { useNavigate } from "react-router";
-import { useAuth } from "../contexts/authContext/authProvider";
 import SearchBar from "./searchBar";
+import { useAuth } from "../contexts/providers/authProvider";
 
 export default function TitleBar() {
   const {user} =  useAuth();

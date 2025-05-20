@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router";
 import { useState } from "react";
-import { useAuth } from "../../contexts/authContext/authProvider";
+import { useAuth } from "../../contexts/providers/authProvider";
 
 import "./login.css";
 import image from "../../assets/loginImage.svg";
@@ -9,7 +9,7 @@ export default function Login({ prop }) {
   const param = useParams();
   const navigate = useNavigate();
 
-  const [Username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
@@ -48,7 +48,7 @@ export default function Login({ prop }) {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    if (email.length === 0 || password.length === 0 || Username.length === 0)
+    if (email.length === 0 || password.length === 0 || username.length === 0)
       return showError("Fill the required fields");
     try {
       setIsSignin(true)
@@ -56,7 +56,7 @@ export default function Login({ prop }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ email, password, Username }),
+        body: JSON.stringify({ email, password, username }),
       });
       if (res.status === 200) {
         return navigate("/success/successfull_login");
@@ -155,7 +155,7 @@ export default function Login({ prop }) {
                 placeholder="Username"
                 name="username"
                 className="login__input"
-                value={Username}
+                value={username}
                 onInput={(e) => setUsername(e.target.value)}
               />
             </div>

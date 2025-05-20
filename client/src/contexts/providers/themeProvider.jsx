@@ -1,5 +1,5 @@
-import themeContext from "./theme.js";
-import { useEffect, useState } from "react";
+import {themeContext} from "../allContexts.js";
+import { useContext, useEffect, useState } from "react";
 
 export default function ThemeProvider({children}) {
   const default_theme = "light";
@@ -13,10 +13,12 @@ export default function ThemeProvider({children}) {
 
     setChoosenTheme(theme);
   };
-  const set_to_dark = () => {
+  const set_to_dark = (e) => {
+    e.stopPropagation();
     setTheme("dark");
   };
-  const set_to_light = () => {
+  const set_to_light = (e) => {
+    e.stopPropagation();
     setTheme("light");
   };
   useEffect(() => {
@@ -36,3 +38,5 @@ export default function ThemeProvider({children}) {
     </themeContext.Provider>
   );
 }
+
+export const  useTheme = () => useContext(themeContext);

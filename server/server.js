@@ -11,6 +11,7 @@ import getAlluser from "./Routes/admin/getUsers.js";
 import setCookieRoute from "./Routes/auth/setCookie.js";
 import refreshToken from "./Routes/auth/authRefresh.js";
 import search from "./Routes/pages/search.js";
+import courses from "./Routes/admin/getCourses.js";
 
 
 const app = express();
@@ -45,6 +46,7 @@ app.use('/',resetPassword);
 app.use('/dashboard',dashboard);
 app.use('/',createAdmin);
 app.use('/admin',getAlluser);
+app.use('/admin',courses);
 app.use('/api/search',search);
 
 // ✅ Protected dashboard

@@ -13,7 +13,8 @@ createAdmin.get("/createAdmin",async (req,res)=>{
             password: 'anupamAdmin@supa',
             user_metadata: {
               role: 'admin',
-              full_name: 'Anupam Thakur'
+              username: 'Anupam Thakur',
+              email:'anupamthakur058@gmail.com'
             },
             email_confirm: true,
             is_super_admin:true

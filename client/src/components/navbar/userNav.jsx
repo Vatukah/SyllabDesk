@@ -1,7 +1,7 @@
-import { useUtility } from "../../contexts/utilityContext/utilityProvider";
+import { useUtility } from "../../contexts/providers/utilityProvider";
 import { NavLink, useNavigate } from "react-router";
 import avatar from "../../assets/avatar.svg";
-import { useAuth } from "../../contexts/authContext/authProvider";
+import { useAuth } from "../../contexts/providers/authProvider";
 import {
   HomeIcon,
   Squares2X2Icon,

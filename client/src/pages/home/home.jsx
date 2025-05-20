@@ -33,7 +33,7 @@ const Home = () => {
           </p>
         </div>
         <div className=" w-full flex justify-center mt-lg">
-          <button className="shiny-cta" >Get Started</button>
+          <button className="shiny-cta"  >Get Started</button>
         </div>
         <img src={heroImg} className="aspect-sqaure max-w-1/2 mx-auto my-lg" />
       </section>

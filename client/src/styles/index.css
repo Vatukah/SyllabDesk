@@ -132,10 +132,15 @@ body::before {
   left: -10%;
   width: 400px;
   aspect-ratio: 1/1;
-  background-color:  rgb(var(--accent-light));
+  background-color:  rgba(var(--accent-light),0.8);
   border-radius: 100%;
   pointer-events: none; /* Prevents interfering with interactions */
 }
+
+.abrilFont{
+    font-family: "Abril Fatface", serif;
+}
+
 @media (max-width: 1440px) {
   :root {
     font-size: 14px;

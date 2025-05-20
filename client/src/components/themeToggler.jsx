@@ -1,5 +1,6 @@
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
-import { useTheme } from "../contexts/ThemeContext/theme.js";
+import { useTheme } from "../contexts/providers/themeProvider";
+
 
 export default function Theme_toggler() {
   const { choosenTheme, set_to_dark, set_to_light } = useTheme();

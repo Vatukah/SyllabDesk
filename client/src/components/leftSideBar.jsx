@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { useUtility } from "../contexts/utilityContext/utilityProvider";
+import { useUtility } from "../contexts/providers/utilityProvider";
 import Navbar from "./navbar/navBar";
 import SubjectNav from "./navbar/subjectNav";
 
@@ -8,6 +8,8 @@ import SubjectNav from "./navbar/subjectNav";
 export default function LeftSideBar({ children }) {
   const { isLeftSideBar, setIsLeftSideBar, leftNavRef } = useUtility();
   const location = useLocation();
+
+  
 
   // 👉 Update sidebar visibility based on path
   useEffect(() => {
@@ -23,18 +25,22 @@ export default function LeftSideBar({ children }) {
   // 👉 Render sidebar component based on path
   const renderSidebar = () => {
     if (location.pathname.startsWith("/admin")) {
-      return <Navbar />;
+      return <Navbar />
     } else if (location.pathname.startsWith("/api/search")) {
-      return <SubjectNav />;
+      return (<SubjectNav />);
     } else {
       return null;
     }
   };
 
+  
+
   return (
     <div
-      className={`${!isLeftSideBar ? "w-0" : "w-fit"} max-w-[15rem] overflow-hidden transition-all duration-500 rounded-tr-xxl ${
-        isLeftSideBar ? "" : "mr-4"
+      className={`${
+        !isLeftSideBar ? "w-0" : "w-fit"
+      } max-w-[15rem] overflow-hidden transition-all duration-500 rounded-tr-xl accent-light ${
+        isLeftSideBar ? "mr-2" : "mr-4"
       }`}
       ref={leftNavRef}
     >
