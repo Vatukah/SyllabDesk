@@ -3,15 +3,18 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import auth from "./Routes/auth/auth.js";
-import dashboard from "./Routes/pages/dashboard.js";
+import dashboard from "./Routes/catalog/dashboard.js";
 import resetPassword from "./Routes/auth/resetPassword.js";
 import createAdmin from "./createAdmin.js";
 import getSession from "./Routes/auth/getSession.js";
 import getAlluser from "./Routes/admin/getUsers.js";
 import setCookieRoute from "./Routes/auth/setCookie.js";
 import refreshToken from "./Routes/auth/authRefresh.js";
-import search from "./Routes/pages/search.js";
+import search from "./Routes/catalog/search.js";
 import courses from "./Routes/admin/getCourses.js";
+import getUniversity from "./Routes/catalog/getUniversity.js";
+import getUniversityProgrammes from "./Routes/catalog/getProgrammes.js";
+import userRoute from './Routes/userPersonal/user.route.js'
 
 
 const app = express();
@@ -48,6 +51,9 @@ app.use('/',createAdmin);
 app.use('/admin',getAlluser);
 app.use('/admin',courses);
 app.use('/api/search',search);
+app.use('/',getUniversity);
+app.use('/',getUniversityProgrammes);
+app.use('/user',userRoute);
 
 // ✅ Protected dashboard
 

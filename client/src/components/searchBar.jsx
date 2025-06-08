@@ -14,6 +14,7 @@ export default function SearchBar() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
+    if(query === "") return;
     const params = new URLSearchParams();
     if (query) params.append("query", query);
     if (topic) params.append("topic", topic);

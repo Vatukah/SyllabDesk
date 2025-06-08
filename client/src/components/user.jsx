@@ -1,8 +1,7 @@
-import { useAuth } from "../contexts/providers/authProvider"
 import avatar from '../assets/avatar.svg';
 import { useUtility } from "../contexts/providers/utilityProvider";
 export default function User(){
-    const {user} = useAuth();
+ 
     const {setIsRightSideBar,setRightSideBarView} = useUtility();
     return (
         <div className="flex items-center gap-2 select-none">

@@ -35,7 +35,9 @@
 @utility accent {
   background-color: var(--accent);
 }
-
+@utility accent-dark {
+  background-color: var(--accent-dark);
+}
 @utility accent-light {
   background-color: rgb(var(--accent-light));
 }
@@ -73,16 +75,18 @@
     var(--primary)
   );
 }
+
 @utility my-scroll-bar {
   &::-webkit-scrollbar {
     width: 0.45rem;
+    max-height:0.45rem;
     background: transparent;
   }
   &::-webkit-scrollbar-track {
     background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    width: 100%;
+    
     background-color: rgba(var(--accent-light), 0.7);
     border-radius: var(--radius-lg);
   }
@@ -90,6 +94,14 @@
     background-color: rgb(var(--accent-light));
   }
 }
+/* z-index scale */
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }   /* Base layer */
+.z-20 { z-index: 20; }   /* Modals/Overlays */
+.z-30 { z-index: 30; }   /* Tooltips/Dropdowns */
+.z-40 { z-index: 40; }   /* Toasts/Notifications */
+.z-50 { z-index: 50; }   /* Loader/Highest Priority */
+
 
 .light {
   --accent: #6767f0;
@@ -124,6 +136,13 @@ body {
   overflow: hidden; /* Prevent unwanted scroll */
   background-color: var(--primary-dark);
   color: var(--text);
+  
+}
+
+body::selection{
+  background-color: var(--accent-dark);
+  color: white;
+  
 }
 body::before {
   content: "";
@@ -135,6 +154,7 @@ body::before {
   background-color:  rgba(var(--accent-light),0.8);
   border-radius: 100%;
   pointer-events: none; /* Prevents interfering with interactions */
+  
 }
 
 .abrilFont{

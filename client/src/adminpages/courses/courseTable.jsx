@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import DynamicTable from "../components/dynamicTable";
-import { API_URL } from "../config/apiUrl";
-import { showError } from "../services/toastify";
-
-const Courses = () => {
+import DynamicTable from "../../components/dynamicTable";
+import { API_URL } from "../../config/apiUrl";
+import { useEffect,useState } from "react";
+import Loader from "../../components/loader/loader";
+import { showError } from "../../services/toastify";
+export default function CoursesTable() {
   const [filterText, setFilterText] = useState("");
   const [courses, setCourses] = useState([{}]);
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const Courses = () => {
     },
     {
       name: "Created_at",
-      selector: (row) => row.created_at.slice(0,10),
+      selector: (row) => row.created_at.slice(0, 10),
     },
   ];
   const data = [
@@ -58,23 +58,19 @@ const Courses = () => {
     fetchCourse();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   return (
-    <section className="p-md">
-      <div className="primary-bg shadow-md border border-[rgba(var(--accent-light),0.5)] rounded-md overflow-hidden">
-        <DynamicTable
-          title={"Courses"}
-          columns={columns}
-          data={courses.filter((course) =>
-            course.name?.toLowerCase().includes(filterText.toLowerCase())
-          )}
-          filterText={filterText}
-          onFilter={setFilterText}
-          onClear={onClear}
-        />
-      </div>
-    </section>
+    <div className="primary-bg shadow-md border border-[rgba(var(--accent-light),0.5)] rounded-md overflow-hidden">
+      <DynamicTable
+        title={"Courses"}
+        columns={columns}
+        data={courses.filter((course) =>
+          course.name?.toLowerCase().includes(filterText.toLowerCase())
+        )}
+        filterText={filterText}
+        onFilter={setFilterText}
+        onClear={onClear}
+      />
+    </div>
   );
-};
-
-export default Courses;
+}

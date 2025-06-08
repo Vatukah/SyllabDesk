@@ -5,6 +5,7 @@ import University from "../../components/university";
 import heroImg from "../../assets/hero_image.png";
 import "./home.css";
 import { showSuccess } from "../../services/toastify";
+import Loader from "../../components/loader/loader";
 // landing Page
 const Home = () => {
   const number = ["HNBGU", "GEU", "SDSU", "DU", "GEHU", "GEHU"];
@@ -22,6 +23,7 @@ const Home = () => {
   return (
     <>
       <section className="w-full relative overflow-hidden" id="heroSection">
+       
         <div className="h-[40vh] w-full flex flex-col justify-end items-center leading-line-height ">
           <h1 className="text-cl font-bold text-accent-dark text-center">
             <span className="text-white">Get Your</span> Study{" "}
@@ -38,6 +40,7 @@ const Home = () => {
         <img src={heroImg} className="aspect-sqaure max-w-1/2 mx-auto my-lg" />
       </section>
       <section name="Explore University" className="w-full">
+      
         <h2 className="text-xxl font-bold text-accent text-center">
           Explore Universities
         </h2>

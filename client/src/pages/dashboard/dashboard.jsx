@@ -1,68 +1,117 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./dashboard.css";
 import WelcomeMessage from "../../components/welcomeMessage";
-import banner from '../../assets/Learning-bro.svg';
-import banner1 from '../../assets/Education-pana.svg';
+import banner1 from "../../assets/Education-pana.svg";
 import StatCard from "../../components/cards/statCard";
-import { AcademicCapIcon, BookOpenIcon } from "@heroicons/react/24/outline";
-import CTA_btn from "../../components/buttons/CTA_btn";
+import {
+  AcademicCapIcon,
+  BookOpenIcon,
+  BuildingLibraryIcon,
+} from "@heroicons/react/24/outline";
+import BookMarkCont from "../../components/bookmark/bookmarkContainer";
+import ActionCard from "../../components/cards/actionCard";
+import UniversityDialog from "../../components/dialogs/universityDialog";
+import { useAuth } from "../../contexts/providers/authProvider";
 
 const Dashboard = () => {
-  
-  useEffect(() => {
-    const hash = window.location.hash;
-    const params = new URLSearchParams(hash.slice(1));
+  const {user} = useAuth();
 
-    const accessToken = params.get("access_token");
-    const refreshToken = params.get("refresh_token");
+  const isUniversity = !!user?.university;
+  const [isOpen, setIsOpen] = useState(false);
 
-    if (accessToken && refreshToken) {
-      // Store both tokens
-      localStorage.setItem("access_token", accessToken);
-      localStorage.setItem("refresh_token", refreshToken);
+  const close = (value) => {
+    setIsOpen(false);
+    console.log(value);
+  };
+  const closeModel = () => {
+    setIsOpen(false);
+  };
 
-      document.cookie = `access_token=${accessToken}; path=/; max-age=${
-        60 * 60 * 24 * 7
-      }; secure; samesite=strict`;
-      document.cookie = `refresh_token=${refreshToken}; path=/; max-age=${
-        60 * 60 * 24 * 30
-      }; secure; samesite=strict`;
-
-      // Clean URL
-      window.history.replaceState(null, null, window.location.pathname);
-    }
-   
-  }, []);
-  
   return (
-    <div className=" p-2">
-      <div className="flex  justify-between w-full h-72 border border-[rgba(var(--accent-light),.8)] bg-[rgba(var(--accent-light),.5)] rounded-md overflow-hidden relative">
-        <div className="absolute top-[50%] left-6 translate-y-[-50%]"> <WelcomeMessage/></div>
-        <img src={banner1} alt="" className=" w-fit object-fit ml-auto " />
-      </div>
-       
-       <div className="my-2 p-2 bg-[var(--bg-blur-color)]">
-        <h2>Academic Details</h2>
-        <div className="flex gap-md m-md">
-          <div className="primary-bg p-sm rounded-md w-fit">
-            <div className="flex gap-sm mb-sm">
-              <AcademicCapIcon className="w-6 text-accent"/>
-              <h3>University</h3>
-            </div>
-            {false?<div>ITM </div>: <CTA_btn text={"Select University"}/>}
-          </div>
-          <div className="primary-bg p-sm rounded-md w-fit">
-            <div className="flex gap-sm mb-sm">
-              <BookOpenIcon className="w-6 text-accent"/>
-              <h3>Programme</h3>
-            </div>
-            {false?<div>ITM </div>: <CTA_btn text={"Select Programme"}/>}
-          </div>
+    <div className=" p-sm">
+      {isOpen && (
+        <UniversityDialog
+          isOpen={isOpen}
+          close={close}
+          closeModel={closeModel}
+        />
+      )}
+      <div className="flex  justify-between w-full h-72 border border-[rgba(var(--accent-light),.8)] bg-[rgba(var(--accent-light),.5)] rounded-md overflow-hidden relative mb-md z-0">
+        <img
+          src={banner1}
+          alt="Decorative Illustration"
+          className="absolute left-0 -top-md opacity-40  object-contain w-full h-full pointer-events-none block md:invisible z-10"
+        />
+        <div className="mx-md my-auto z-20">
+          {" "}
+          <WelcomeMessage />
+          <p class="text-gray-600">
+            You’ve completed 4 of 6 modules. Let’s keep the momentum going!
+          </p>
         </div>
-        
-       </div>
-    
-  
+        <img
+          src={banner1}
+          alt="Main Illustration"
+          className="invisible md:visible absolute right-4 bottom-0 w-100 "
+        />
+      </div>
+      <BookMarkCont />
+
+      <div className="my-sm p-2 ">
+        <h2 className="text-accent font-bold">Academic Details</h2>
+        <div className="flex gap-md m-xs ">
+          {isUniversity? (
+            <>
+              <StatCard
+                title={"University"}
+                icon={<AcademicCapIcon className="w-8" />}
+                value={user.university?.name}
+                isEditable={true}
+                editAction={(e)=>{
+                  e.stopPropagation();
+                  setIsOpen(true);
+
+                }}
+              />
+              <StatCard
+                title={"Programme"}
+                icon={<BookOpenIcon className="w-8" />}
+                value={user.programme?.name}
+                isEditable={true}
+                editAction={(e)=>{
+                  e.stopPropagation();
+                  setIsOpen(true);
+
+                }}
+              />
+              <StatCard
+                title={"Semester"}
+                icon={<BookOpenIcon className="w-8" />}
+                value={user.semester}
+                isEditable={true}
+                editAction={(e)=>{
+                  e.stopPropagation();
+                  setIsOpen(true);
+
+                }}
+              />
+            </>
+          ) : (
+            <div className="w-full">
+              <ActionCard
+                title={"Select Your University to Get Started"}
+                para={
+                  "Choose your university to access personalized course materials, schedules, and updates tailored just for you."
+                }
+                textAlign={"center"}
+                actionText={"Choose Your University"}
+                icon={<BuildingLibraryIcon className="w-8" />}
+                action={() => setIsOpen(true)}
+              />
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ export default function AdminProtectedRoute({ children }) {
 
   return (
     <>
-      {user?.user_metadata?.role === "admin" && isAdmin ? (
+      {user?.role === "admin" && isAdmin ? (
         children
       ) : (
         <Navigate to={"/notAuthorized"} />

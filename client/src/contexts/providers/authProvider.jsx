@@ -22,8 +22,9 @@ export default function AuthProvider({ children }) {
       }
 
       const {user} = await response.json();
+      
      
-      const role = user?.user_metadata?.role;
+      const role = user?.role;
       setUser(user);
       setIsAdmin(role === "admin");
     } catch (error) {

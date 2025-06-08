@@ -8,12 +8,13 @@ import {
   BookOpenIcon,
   DocumentTextIcon,
   ArrowRightStartOnRectangleIcon,
+  UserIcon,
 } from "@heroicons/react/24/outline";
 import NavItem from "./navItem";
-import "../../styles/btn.css"
+import "../../styles/btn.css";
 export default function UserNav() {
   const { setIsRightSideBar } = useUtility();
-  const { user ,setUser,isAdmin} = useAuth();
+  const { user, setUser, isAdmin } = useAuth();
   const navigate = useNavigate();
   const navigationLinks = [
     {
@@ -33,28 +34,32 @@ export default function UserNav() {
     },
     {
       name: "Notes",
-      path: "/path",
+      path: "/notes",
       icon: <DocumentTextIcon />,
     },
   ];
 
-  const protectedLink =[
+  const protectedLink = [
     {
-      name:"Admin Dashboard",
-      path:"/adminDashboard",
-      icon: <i className="fa-solid fa-user-tie"></i>,
-      action: ()=>{ navigate("/admin/dashboard")}
-    }
-  ]
+      name: "Admin Dashboard",
+      path: "/admin/dashboard",
+      icon: <UserIcon />,
+      action: () => {
+        navigate("/admin/dashboard");
+      },
+    },
+  ];
 
-  const handleLogout=async()=>{
-    const response = await fetch('http://localhost:5008/logout',{method:'GET',credentials:"include"});
+  const handleLogout = async () => {
+    const response = await fetch("http://localhost:5008/logout", {
+      method: "GET",
+      credentials: "include",
+    });
     const logout = await response.json();
     setUser(null);
     setIsRightSideBar(false);
     navigate(logout.redirect);
-      
-  }
+  };
 
   return (
     <>
@@ -69,6 +74,9 @@ export default function UserNav() {
 
         <div className=" overflow-hidden shrink-0 grow-0">
           <div className="truncate max-w-full whitespace-nowrap overflow-hidden text-ellipsis font-bold text-center mt-2">
+            {user?.username}
+          </div>
+          <div className="truncate max-w-full whitespace-nowrap overflow-hidden text-ellipsis font-bold text-center mt-xxs">
             {user?.email}
           </div>
           <div className="flex justify-evenly items-center gap-2 my-2">
@@ -95,15 +103,19 @@ export default function UserNav() {
               <NavItem icon={link.icon} text={link.name} key={index} />
             </NavLink>
           ))}
-           
-            {isAdmin && protectedLink.map((link,index)=>( <NavItem icon={link.icon} text={link.name} key={index} action={link.action}/> ) )}
-          <div
-           
-            className="danger-action"
-          
-            onClick={handleLogout}
-          >
-            <NavItem icon={<ArrowRightStartOnRectangleIcon/>} text={"Log Out"} />
+
+          {isAdmin &&
+            protectedLink.map((link, index) => (
+              <NavLink to={link.path} key={index} className="navHover">
+                {" "}
+                <NavItem icon={link.icon} text={link.name} />{" "}
+              </NavLink>
+            ))}
+          <div className="danger-action" onClick={handleLogout}>
+            <NavItem
+              icon={<ArrowRightStartOnRectangleIcon />}
+              text={"Log Out"}
+            />
           </div>
         </div>
       </div>

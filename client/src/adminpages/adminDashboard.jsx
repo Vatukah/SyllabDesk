@@ -9,6 +9,7 @@ import {
   BookOpenIcon,
 } from "@heroicons/react/24/outline";
 import BarGraph from "../components/statGraph/barGraph";
+import Loader from "../components/loader/loader";
 
 
 
@@ -63,7 +64,7 @@ const getActiveUser = (user) => {
 
 
 
-  if(loading) return <div>Loading...</div>
+  if(loading) return <Loader/>
   return (
     <section className="p-md">
    

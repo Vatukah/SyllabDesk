@@ -77,8 +77,8 @@ export default function Users() {
         name: user.username,
         email: user.email,
         role: user.role,
-        university: user.university,
-        course: user.course,
+        university: user?.university?.name,
+        course: user?.course?.name,
         register_at: user.created_at.slice(0, 10),
       })) || []
     );

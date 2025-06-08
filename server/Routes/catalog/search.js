@@ -3,28 +3,28 @@ import { supabaseService } from "../../services/supabaseClient.js";
 import supabase from "../../services/supabaseClient.js";
 
 const search = Router();
-search.get("/:subject", async (req, res) => {
+search.get("/:course", async (req, res) => {
   const topic = req.query.topic;
-  const query = req.params.subject;
+  const query = req.params.course;
 
   if (!query || query.length === 0)
     return res.status(400).json({ message: "Invalid search" });
 
   // 1. Find subjects
-  const { data: subjects } = await supabase
-    .from("subjects")
+  const { data: courses } = await supabase
+    .from("courses")
     .select("*")
     .ilike("name", `%${query}%`);
 
-  if (!subjects || subjects.length === 0)
+  if (!courses || courses.length === 0)
     return res.status(404).json({ message: "No matching subjects found" });
 
   // 2. Get chapters
-  const subjectIds = subjects.map((sub) => sub.id);
+  const courseIds = courses.map((sub) => sub.id);
   const { data: chapters } = await supabase
     .from("chapters")
     .select("*")
-    .in("subject_id", subjectIds);
+    .in("course_id", courseIds);
 
   const chapterId = chapters.map((ch) => ch.id);
 
@@ -54,7 +54,7 @@ search.get("/:subject", async (req, res) => {
     }
   }
 
-  res.json({ subject:subjects[0].name,topics, chapters, currentTopic });
+  res.json({ course:courses[0].name,topics, chapters, currentTopic });
 });
 
 search.get("/get-note/:Id", async (req, res) => {

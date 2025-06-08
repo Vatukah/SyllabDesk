@@ -8,15 +8,18 @@ header {
   align-items: center;
   overflow: hidden;
 }
+
 header .logo {
   width: fit-content;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
+
 header .logo img {
   width: 1.85rem;
 }
+
 header .logo .logo-name {
   font-size: large;
   font-weight: 600;
@@ -34,42 +37,37 @@ header .logo .logo-name {
   );
   border-radius: var(--radius-md);
 } */
-.navHover{
+.navHover {
   position: relative;
 }
+
 .navHover:hover {
   display: block;
-  background-color: color-mix(
-    in oklab,
-    var(--accent) 40%,
-    #e0e0e000 60%
-  );
+  background-color: color-mix(in oklab, var(--accent) 40%, #e0e0e000 60%);
   border-radius: var(--radius-md);
 }
-.active{
-  background-color: color-mix(
-    in oklab,
-    var(--accent) 40%,
-    #e0e0e000 60%
-  ); border-radius: var(--radius-md);}
 
-nav[data-expanded="false"] .navHover:hover::before{
- content: attr(data-content);
- display: block;
- width:max-content ;
- padding-inline: var(--spacing-sm);
- border-radius: var(--radius-sm);
- background-color: var(--text);
- color: var(--primary);
- position: absolute;
- right: -40%;
- top:50%;
- transform: translateX(100%)  translateY(-50%);
- box-shadow: var(--shadow-lg);
+.active {
+  background-color: color-mix(in oklab, var(--accent) 40%, #e0e0e000 60%);
+  border-radius: var(--radius-md);
 }
 
+nav[data-expanded="false"] .navHover:hover::before {
+  content: attr(data-content);
+  display: block;
+  width: max-content;
+  padding-inline: var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  background-color: var(--text);
+  color: var(--primary);
+  position: absolute;
+  right: -40%;
+  top: 50%;
+  transform: translateX(100%) translateY(-50%);
+  box-shadow: var(--shadow-lg);
+}
 
-.bento-container{
+.bento-container {
   /* display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: 1fr 1fr; */
@@ -77,24 +75,28 @@ nav[data-expanded="false"] .navHover:hover::before{
   padding: 2rem;
   width: 80%;
   height: fit-content;
-  background:linear-gradient(110deg,rgb(var(--accent-light)) -10%,transparent 40%,transparent 60%  ,rgb(var(--accent-light)) 110%);
-  border: 1px solid rgba(var(--accent-light),.5);
- 
+  background: linear-gradient(110deg,
+      rgb(var(--accent-light)) -10%,
+      transparent 40%,
+      transparent 60%,
+      rgb(var(--accent-light)) 110%);
+  border: 1px solid rgba(var(--accent-light), 0.5);
 }
 
-.bento-btn{
+.bento-btn {
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 100%;
   cursor: pointer;
 }
-  
-div[data-bento-grid="image1"],div[data-bento-grid="image2"]{
- 
-    z-index: 1;
+
+div[data-bento-grid="image1"],
+div[data-bento-grid="image2"] {
+  z-index: 1;
 }
+
 div[data-bento-grid="image1"]::before,
- div[data-bento-grid="image2"]::before {
+div[data-bento-grid="image2"]::before {
   content: "";
   position: absolute;
   left: 0%;
@@ -106,7 +108,9 @@ div[data-bento-grid="image1"]::before,
   border-radius: 100%;
   z-index: -2;
 }
-div[data-bento-grid="image1"]::after,div[data-bento-grid="image2"]::after{
+
+div[data-bento-grid="image1"]::after,
+div[data-bento-grid="image2"]::after {
   content: "";
   position: absolute;
   right: 0%;
@@ -116,30 +120,79 @@ div[data-bento-grid="image1"]::after,div[data-bento-grid="image2"]::after{
   background-color: var(--accent);
   z-index: -2;
 }
-div[data-bento-grid="image2"]::before{
+
+div[data-bento-grid="image2"]::before {
   left: unset;
   right: 0%;
- 
 }
-div[data-bento-grid="image2"]::after{
+
+div[data-bento-grid="image2"]::after {
   left: 0%;
   top: 0%;
 }
-div[data-bento-grid="image1"] img,div[data-bento-grid="image2"]  img{
+
+div[data-bento-grid="image1"] img,
+div[data-bento-grid="image2"] img {
   z-index: -1;
 }
 
-div[data-bento-grid="image2"] img{
+div[data-bento-grid="image2"] img {
   left: unset;
   right: 5%;
 }
 
-div[data-bento-grid="image2"] .flexbox{
+div[data-bento-grid="image2"] .flexbox {
   margin-left: unset;
   margin-right: auto;
   align-items: flex-start;
   text-align: start;
 }
-.grid-text{
+
+.grid-text {
   text-shadow: 0 0 2px black;
+}
+
+.bookmarkCont {
+  border: 1px solid rgba(var(--accent-light), 0.5);
+  border-radius: var(--radius-md);
+  background-image: url("/oneBookmark.png");
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 10px -10px;
+}
+
+
+.wave {
+  outline: 0px solid rgba(var(--accent-light), 1);
+  animation: wave 0.3s linear;
+}
+
+.entry {
+  
+  animation: entry 0.3s linear;
+}
+
+@keyframes entry {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes wave {
+  to {
+    outline: 8px solid rgba(var(--accent-light), 0.2);
+  }
+}
+
+.badgeImg::before {
+  content: attr(data-badge-name);
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%);
+  width: 100%;
+  height: auto;
+  background-color: var(--primary);
+  box-shadow: 0px 0px 20px var(--primary-dark);
 }

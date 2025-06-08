@@ -1,5 +1,6 @@
 import { Router } from "express";
 import supabase from "../../services/supabaseClient.js";
+import * as userService from '../../services/user.service.js'
 
 const getSession = Router();
 
@@ -16,7 +17,9 @@ getSession.get("/", async (req, res) => {
     if (accessToken) {
       const { data:{ user}, error } = await supabase.auth.getUser(accessToken);
       if (user) {
-        return res.status(200).json({ user });
+        const {id} = user;
+        const {user:userProfile,error} = await userService.getProfile(id)
+        return res.status(200).json({ user : userProfile });
       }
     }
 
@@ -40,8 +43,9 @@ getSession.get("/", async (req, res) => {
           sameSite: "Lax",
           secure: true,
         });
-        const {user} = data;
-        return res.status(200).json({ user });
+        const {user:{id}} = data;
+        const {user:userProfile,error} = await userService.getProfile(id)
+        return res.status(200).json({ user:userProfile });
       }
     }
 
@@ -53,7 +57,7 @@ getSession.get("/", async (req, res) => {
       .json({ message: "Session expired. Please log in again." });
 
   } catch (err) {
-    console.error("Session error:", err);
+   
     res.clearCookie("access_token");
     res.clearCookie("refresh_token");
     return res.status(500).json({ message: "Internal Server Error" });
