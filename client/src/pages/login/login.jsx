@@ -25,7 +25,7 @@ export default function Login({ prop }) {
       return showError("Fill the required fields");
     try {
       setIsSignin(true);
-      const res = await fetch(`${API_URL}}auth/signin`, {
+      const res = await fetch(`${API_URL}auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // Important to send cookies
