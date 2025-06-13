@@ -1,22 +1,11 @@
-import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-dotenv.config({ path: './server/.env.production' }); // 👈 hard-coded path just to debug
+import { createClient } from "@supabase/supabase-js";
 
-console.log("SUPABASE_URL (fallback test):", process.env.SUPABASE_URL);
-// ✅ Ensure environment variables are present
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const { SUPABASE_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } = process.env;
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing Supabase environment variables.');
-}
-
-
-
-
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-export const supabaseService = createClient(supabaseUrl, supabaseServiceKey);
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+export const supabaseService = createClient(
+  SUPABASE_URL,
+  SUPABASE_SERVICE_ROLE_KEY
+);
 
 export default supabase;

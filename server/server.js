@@ -1,16 +1,9 @@
+import 'dotenv/config';
 import cookieParser from "cookie-parser";
-import { config as configDotenv } from "dotenv";
-const envPath = path.resolve(
-  process.cwd(),
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env.development"
-);
-configDotenv({ path: envPath }); // ✅ This is correct
-
 
 // Now you can access your env variables
-console.log("NODE_ENV:", process.env.NODE_ENV);
-console.log("PORT:", process.env.PORT);
 
+console.log("PORT:", process.env.PORT);
 
 import express from "express";
 import cors from "cors";
@@ -26,66 +19,62 @@ import search from "./Routes/catalog/search.js";
 import courses from "./Routes/admin/getCourses.js";
 import getUniversity from "./Routes/catalog/getUniversity.js";
 import getUniversityProgrammes from "./Routes/catalog/getProgrammes.js";
-import userRoute from './Routes/userPersonal/user.route.js'
-
-
-
+import userRoute from "./Routes/userPersonal/user.route.js";
 
 const app = express();
 const allowedOrigins = [
-  'https://syllabdesk.vercel.app',
-  'http://localhost:5173',
+  "https://syllabdesk.vercel.app",
+  "http://localhost:5173",
 ];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
-
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-
 //  Sign Up Route
-app.use('/session',getSession);
-app.use("/auth",auth);
-app.use("/auth",setCookieRoute);
-app.use("/auth",refreshToken);
-app.use('/',resetPassword);
-app.use('/dashboard',dashboard);
-app.use('/',createAdmin);
-app.use('/admin',getAlluser);
-app.use('/admin',courses);
-app.use('/api/search',search);
-app.use('/',getUniversity);
-app.use('/',getUniversityProgrammes);
-app.use('/user',userRoute);
+app.use("/session", getSession);
+app.use("/auth", auth);
+app.use("/auth", setCookieRoute);
+app.use("/auth", refreshToken);
+app.use("/", resetPassword);
+app.use("/dashboard", dashboard);
+app.use("/", createAdmin);
+app.use("/admin", getAlluser);
+app.use("/admin", courses);
+app.use("/api/search", search);
+app.use("/", getUniversity);
+app.use("/", getUniversityProgrammes);
+app.use("/user", userRoute);
 
 // ✅ Protected dashboard
 
-
 // ✅ Logout route (clears cookie)
 app.get("/logout", (req, res) => {
-  res.clearCookie('access_token', {
-    path: '/',
-    secure: true,    // if you used it while setting
-    sameSite: 'Lax',
+  res.clearCookie("access_token", {
+    path: "/",
+    secure: true, // if you used it while setting
+    sameSite: "Lax",
   });
-  res.clearCookie('refresh_token', {
-    path: '/',
+  res.clearCookie("refresh_token", {
+    path: "/",
     secure: true,
-    sameSite: 'Lax',
+    sameSite: "Lax",
   });
-  
-  res.status(200).json({statusText:"Logout Successfully",redirect:"/"});
+
+  res.status(200).json({ statusText: "Logout Successfully", redirect: "/" });
 });
 
 // Test route
@@ -100,6 +89,6 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(process.env.NODE_ENV)
+  
   console.log(` Server is running at http://localhost:${PORT}`);
 });
