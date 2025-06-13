@@ -1,6 +1,6 @@
 import { Router } from "express";
 import supabase from "../../supabaseClient.js";
-import * as userService from '../../services/user.service.js'
+import * as userService from "../../services/user.service.js";
 
 const getSession = Router();
 
@@ -15,11 +15,23 @@ getSession.get("/", async (req, res) => {
   try {
     // Try using the access token first
     if (accessToken) {
-      const { data:{ user}, error } = await supabase.auth.getUser(accessToken);
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser(accessToken);
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
       if (user) {
-        const {id} = user;
-        const {user:userProfile,error} = await userService.getProfile(id)
-        return res.status(200).json({ user : userProfile });
+        const { id } = user;
+        const { user: userProfile, error } = await userService.getProfile(id);
+
+        if (error) {
+          throw new Error(error.message);
+        }
+        return res.status(200).json({ user: userProfile });
       }
     }
 
@@ -28,6 +40,10 @@ getSession.get("/", async (req, res) => {
       const { data, error } = await supabase.auth.refreshSession({
         refresh_token: refreshToken,
       });
+
+      if (error) {
+        throw new Error(error.message);
+      }
 
       if (data?.session && data?.user) {
         // Refresh successful — update cookies
@@ -43,9 +59,14 @@ getSession.get("/", async (req, res) => {
           sameSite: "Lax",
           secure: true,
         });
-        const {user:{id}} = data;
-        const {user:userProfile,error} = await userService.getProfile(id)
-        return res.status(200).json({ user:userProfile });
+        const {
+          user: { id },
+        } = data;
+        const { user: userProfile, error } = await userService.getProfile(id);
+        if (error) {
+          throw new Error(error.message);
+        }
+        return res.status(200).json({ user: userProfile });
       }
     }
 
@@ -55,10 +76,8 @@ getSession.get("/", async (req, res) => {
     return res
       .status(401)
       .json({ message: "Session expired. Please log in again." });
-
   } catch (err) {
-   
-    return res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ message: err.message });
   }
 });
 

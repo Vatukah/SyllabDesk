@@ -1,5 +1,5 @@
 import { Router } from "express";
-import supabase, { supabaseService } from "../../supabaseClient.js";
+import supabase from "../../supabaseClient.js";
 
 const getUniversityProgrammes = Router();
 

@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 
 // Now you can access your env variables
 
-console.log("PORT:", process.env.PORT);
+
 
 import express from "express";
 import cors from "cors";

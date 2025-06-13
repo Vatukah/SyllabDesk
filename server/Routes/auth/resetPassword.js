@@ -13,7 +13,7 @@ resetPassword.post("/reset_link", async (req, res) => {
       .json({ message: "please provide valid information!" });
   }
 
-  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+  const {  error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: "http://localhost:5173/resetPassword",
   });
 
