@@ -1,5 +1,5 @@
 import { Navigate,useParams } from 'react-router';
-import okImg from '../../assets/ok-pana.svg'
+import okImg from '../../assets/Ok-pana.svg'
 export default function SuccessPage() {
   const param = useParams();
   const reason = param.type;
