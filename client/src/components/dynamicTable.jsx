@@ -1,4 +1,4 @@
-import DataTable from "react-data-table-component";
+
 import { FunnelIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useUtility } from "../contexts/providers/utilityProvider";
 const Filter = ({ filterText, onFilter, onClear, total ,title }) => {

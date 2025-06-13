@@ -1,6 +1,6 @@
 import { Router } from "express";
 import supabase from "../../supabaseClient.js";
-import { supabaseService } from "../../supabaseClient.js";
+
 const auth = Router();
 
 auth.post("/signup", async (req, res) => {
@@ -8,11 +8,11 @@ auth.post("/signup", async (req, res) => {
 
   if (!email || !password || !username) return res.status(400).json({message:"Invalid inputs.Please fill all required fields."});
 
-  const {data:UserExist,error:UserExistError} = await supabase.from('profiles').select("id").eq("email",email);
+  const {data:UserExist} = await supabase.from('profiles').select("id").eq("email",email);
 
   if(UserExist.length !== 0) return res.status(409).json({ message: "A confirmation email has already been sent or the user exists." });
 
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
