@@ -1,6 +1,7 @@
+import { API_URL } from "../config/apiUrl";
 
 
 export async function fetchAllUsers() {
-    const response = await fetch("http://localhost:5008/admin/users", { method:"get",credentials:"include" });
+    const response = await fetch(`${API_URL}admin/users`, { method:"get",credentials:"include" });
      return response;
   }
