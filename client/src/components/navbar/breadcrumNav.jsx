@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 
  export default function Breadcrum(){
 
