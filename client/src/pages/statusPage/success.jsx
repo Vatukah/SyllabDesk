@@ -12,7 +12,7 @@ export default function SuccessPage() {
     }
   };
 
-  const message = messages[reason] || Navigate('http://localhost:5173/');
+  const message = messages[reason] || Navigate('/');
 
   return (
     <div className="flex items-center justify-center min-h-screen ">

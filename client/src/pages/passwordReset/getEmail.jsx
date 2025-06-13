@@ -4,21 +4,17 @@ import {
   showLoadingToast,
   toastWithServerMessage,
 } from "../../services/toastify.js";
+import { API_URL } from "../../config/apiUrl.js";
 export default function GetEmail() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const handleGetEmail = async (e) => {
     e.preventDefault();
 
-    // const res =  fetch("http://localhost:5008/reset_link", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ email:email }),
-    // });
     try {
       setLoading(true);
       await toastWithServerMessage(
-        fetch("http://localhost:5008/reset_link", {
+        fetch(`${API_URL}reset_link`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: email }),
@@ -28,15 +24,6 @@ export default function GetEmail() {
     } finally {
       setLoading(false);
     }
-
-    // if (res.status !== 200) {
-    //   const data = await res.json();
-    //   console.log(data);
-    //   return;
-    // }
-
-    // const data = await res.json();
-    // console.log(data);
   };
   return (
     <div className="w-full h-full flex justify-center items-center">
@@ -64,7 +51,9 @@ export default function GetEmail() {
           <input
             type="submit"
             value={!loading ? "Send Link" : "Sending..."}
-            className={`${loading?"opacity-50":"opacity-100"} accent rounded-sm text-primary font-bold`}
+            className={`${
+              loading ? "opacity-50" : "opacity-100"
+            } accent rounded-sm text-primary font-bold`}
             disabled={loading}
           />
         </form>

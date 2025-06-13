@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import illustration from "../../assets/reset_password.svg"; // ← Add a vector illustration to this path
 import "./resetPassword.css";
 import { showInfo, toastWithServerMessage } from "../../services/toastify";
+import { API_URL } from "../../config/apiUrl";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -25,7 +26,7 @@ export default function ResetPassword() {
 
       const accessToken = params.get("access_token");
 
-      const data = await toastWithServerMessage(fetch("http://localhost:5008/reset_password", {
+      const data = await toastWithServerMessage(fetch(`${API_URL}reset_password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
