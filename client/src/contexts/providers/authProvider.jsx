@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../allContexts.js";
+import { API_URL } from "../../config/apiUrl.js";
 
 
 export default function AuthProvider({ children }) {
@@ -9,7 +10,7 @@ export default function AuthProvider({ children }) {
 
   const getUser = async () => {
     try {
-      const response = await fetch("http://localhost:5008/session", {
+      const response = await fetch(`${API_URL}session`, {
         method: "GET",
         credentials: "include",
       });
@@ -41,7 +42,7 @@ export default function AuthProvider({ children }) {
      // Periodically refresh session every 5 minutes (300 seconds)
      const interval = setInterval(async () => {
       try {
-        const response = await fetch("http://localhost:5008/auth/refresh", {
+        const response = await fetch(`${API_URL}auth/refresh`, {
           method: "GET",
           credentials: "include", // Ensures cookies are sent with the request
         });
