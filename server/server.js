@@ -23,7 +23,7 @@ import userRoute from "./Routes/userPersonal/user.route.js";
 
 const app = express();
 const allowedOrigins = [
-  "https://syllabdesk.vercel.app",
+  "https://syllabdesk.onrender.com",
   "http://localhost:5173",
 ];
 
