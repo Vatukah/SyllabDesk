@@ -1,4 +1,3 @@
-import AddCourseForm from "../../components/forms/addCourseForm";
 import Breadcrum from "../../components/navbar/breadcrumNav";
 import { Outlet } from "react-router";
 

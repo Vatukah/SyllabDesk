@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import NavItem from "./navItem";
 import "../../styles/btn.css";
+import { API_URL } from "../../config/apiUrl";
 export default function UserNav() {
   const { setIsRightSideBar } = useUtility();
   const { user, setUser, isAdmin } = useAuth();
@@ -51,7 +52,7 @@ export default function UserNav() {
   ];
 
   const handleLogout = async () => {
-    const response = await fetch("http://localhost:5008/logout", {
+    const response = await fetch(`${API_URL}logout`, {
       method: "GET",
       credentials: "include",
     });

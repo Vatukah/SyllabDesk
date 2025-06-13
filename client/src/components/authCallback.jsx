@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { API_URL } from "../config/apiUrl";
 
 export default function AuthCallback() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function AuthCallback() {
     }
 
     // Send tokens to backend to set cookies
-    fetch(`http://localhost:5008/auth/set-cookie`, {
+    fetch(`${API_URL}auth/set-cookie`, {
       method: "POST",
       credentials: "include",
       headers: {

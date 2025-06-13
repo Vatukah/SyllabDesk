@@ -5,6 +5,7 @@ import { useAuth } from "../../contexts/providers/authProvider";
 import "./login.css";
 import image from "../../assets/loginImage.svg";
 import { showError } from "../../services/toastify";
+import { API_URL } from "../../config/apiUrl";
 export default function Login({ prop }) {
   const param = useParams();
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function Login({ prop }) {
       return showError("Fill the required fields");
     try {
       setIsSignin(true);
-      const res = await fetch("http://localhost:5008/auth/signin", {
+      const res = await fetch(`${API_URL}}auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // Important to send cookies
@@ -52,7 +53,7 @@ export default function Login({ prop }) {
       return showError("Fill the required fields");
     try {
       setIsSignin(true)
-      const res = await fetch("http://localhost:5008/auth/signup", {
+      const res = await fetch(`${API_URL}auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
