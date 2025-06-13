@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { fetchAllUsers } from "../services/getUsers";
+import { useState } from "react";
+
 import DynamicTable from "../components/dynamicTable";
-import TableSkeleton from "../components/tableSkeleton";
 import { useAdmin } from "../contexts/providers/adminProvider";
-import { selectClasses } from "@mui/material";
 
 export default function Users() {
   const { totalUsers, loading } = useAdmin();
@@ -13,9 +11,7 @@ export default function Users() {
     setFilterText("");
   };
 
-  
-
-  const columns= [
+  const columns = [
     {
       name: "Name",
       selector: (row) => row.name,
@@ -28,9 +24,17 @@ export default function Users() {
     {
       name: "Role",
       selector: (row) => row.role,
-      cell: (row)=> (
-        <span className={`${row.role === 'admin'?"text-green-400 bg-green-100":"text-blue-400 bg-blue-100"} border py-1 px-2 rounded-sm `}>{row.role}</span>
-      )
+      cell: (row) => (
+        <span
+          className={`${
+            row.role === "admin"
+              ? "text-green-400 bg-green-100"
+              : "text-blue-400 bg-blue-100"
+          } border py-1 px-2 rounded-sm `}
+        >
+          {row.role}
+        </span>
+      ),
     },
     {
       name: "Course",
@@ -84,8 +88,6 @@ export default function Users() {
     );
   };
 
-  
-
   if (loading) return <TableSkeleton rows={8} columns={4} />;
   return (
     <section className="p-md">
@@ -97,7 +99,6 @@ export default function Users() {
           filterText={filterText}
           onFilter={setFilterText}
           onClear={onClear}
-          
         />
       </div>
     </section>

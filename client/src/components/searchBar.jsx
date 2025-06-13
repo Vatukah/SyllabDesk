@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { TextField, Button, Box } from "@mui/material";
-import CTA_btn from "./buttons/CTA_btn";
-import { Search } from "@mui/icons-material";
+
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useCourseOutline } from "../contexts/providers/CourseOutlineProvider";
 
