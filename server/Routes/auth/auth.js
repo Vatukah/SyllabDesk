@@ -1,6 +1,6 @@
 import { Router } from "express";
-import supabase from "../../services/supabaseClient.js";
-import { supabaseService } from "../../services/supabaseClient.js";
+import supabase from "../../supabaseClient.js";
+import { supabaseService } from "../../supabaseClient.js";
 const auth = Router();
 
 auth.post("/signup", async (req, res) => {
@@ -24,7 +24,7 @@ auth.post("/signup", async (req, res) => {
       },
     },
   });
-  console.log(data,error)
+
   if (error) return res.status(401).json({ message: error.message });
   
 

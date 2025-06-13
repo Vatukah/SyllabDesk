@@ -88,10 +88,10 @@ export default function UniversityDialog({ isOpen, close, closeModel }) {
       ref={ref}
       className=" w-full h-full fixed top-0 left-0 z-30 bg-transparent  md:py-xs"
     >
-      <div className="flex flex-col bg-white w-full max-w-[800px] h-full md:w-1/2 mx-auto border border-[rgba(var(--accent-light))] md:rounded-md p-xs">
+      <div className="flex flex-col primary-bg w-full max-w-[800px] h-full md:w-1/2 mx-auto border border-[rgba(var(--accent-light))] md:rounded-md p-xs">
         <div className="flex items-center gap-xs border-b-1 border-gray-400 p-xs">
           <BuildingLibraryIcon className="w-10 text-accent primary-bg-dark p-xxs rounded-md" />
-          <h3 className="font-bold   ">Choose your University</h3>
+          <h3 className="font-bold text  ">Choose your University</h3>
         </div>
         <div id="formContainer" className="w-full grow-1 overflow-auto">
           {intiLoading ? (
@@ -173,7 +173,7 @@ function Form({ university = [], mySemester, handleSelection ,myProgramme,myUniv
         <select
           name="university"
           id="university"
-          className="border border-gray-400 w-full p-xs rounded-md"
+          className="border border-gray-400 w-full p-xs rounded-md text"
           value={myUniversity?.id||""}
           onChange={(e) => {
             const name = e.target.name;
@@ -199,7 +199,7 @@ function Form({ university = [], mySemester, handleSelection ,myProgramme,myUniv
         <select
           name="programme"
           id="programme"
-          className="border border-gray-400 w-full p-xs rounded-md disabled:text-gray-400"
+          className="border border-gray-400 w-full p-xs rounded-md text disabled:text-gray-400"
            value={myProgramme?.id||""}
           onChange={(e) => {
             const name = e.target.name;
@@ -265,7 +265,7 @@ function Form({ university = [], mySemester, handleSelection ,myProgramme,myUniv
                   className={`p-xs rounded-md select-none  transition-transform text-center text-sm badgeImg  relative ${
                     (isSelected)
                       ? " accent-light  wave "
-                      : " hover:primary-bg scale-[.8]"
+                      : " hover:primary-bg-dark scale-[.8]"
                   }
                    ${!mySemester ? "entry" : ""}`}
                   onClick={() => handleSelection("semester", index + 1)}

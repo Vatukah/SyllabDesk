@@ -103,7 +103,7 @@
 .z-50 { z-index: 50; }   /* Loader/Highest Priority */
 
 
-.light {
+[data-color-mode = "light"] {
   --accent: #6767f0;
   --accent-light: 141, 141, 255;
   --accent-dark: #4242c0;
@@ -113,7 +113,7 @@
   --text: #1c1c1c;
 }
 
-.dark {
+[data-color-mode = "dark"] {
   --accent: #6767f0;
   --accent-light: 141, 141, 255;
   --accent-dark: #4242c0;
@@ -125,7 +125,7 @@
 
 :root {
   font-size: 16px;
- 
+  
 }
 body {
   font-family:var(--font-inter);
@@ -160,6 +160,10 @@ body::before {
 .abrilFont{
     font-family: "Abril Fatface", serif;
 }
+
+
+
+
 
 @media (max-width: 1440px) {
   :root {

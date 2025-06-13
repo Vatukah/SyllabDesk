@@ -1,4 +1,4 @@
-import { supabaseService } from "./supabaseClient.js";
+import { supabaseService } from "../supabaseClient.js";
 
 export const updateUniversity = async (id, payload={}) => {
 

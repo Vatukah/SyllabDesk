@@ -1,4 +1,4 @@
-import { supabaseService } from "./services/supabaseClient.js";
+import { supabaseService } from "./supabaseClient.js";
 import { Router } from "express";
 
 

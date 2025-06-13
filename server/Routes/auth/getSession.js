@@ -1,5 +1,5 @@
 import { Router } from "express";
-import supabase from "../../services/supabaseClient.js";
+import supabase from "../../supabaseClient.js";
 import * as userService from '../../services/user.service.js'
 
 const getSession = Router();
@@ -58,8 +58,6 @@ getSession.get("/", async (req, res) => {
 
   } catch (err) {
    
-    res.clearCookie("access_token");
-    res.clearCookie("refresh_token");
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });

@@ -1,4 +1,4 @@
-import supabase, { supabaseService } from "../../services/supabaseClient.js";
+import supabase, { supabaseService } from "../../supabaseClient.js";
 import { Router } from "express";
 import { requireAdmin } from "../middleware/requireAdmin.js";
 

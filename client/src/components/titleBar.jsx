@@ -15,11 +15,11 @@ export default function TitleBar() {
   
     return (
       <header>
-        <div className="logo ">
-          <img src={Logo} alt="logo" />
-          <div className="logo-name">SyllabDesk</div>
+        <div className="logo z-90 ">
+          <img src={Logo} alt="logo" className="max-w-none w-xxl object-fit" />
+          <div className="logo-name hidden md:block">SyllabDesk</div>
         </div>
-        <SearchBar/>
+  <SearchBar/>
         <div>
           {user ? (
               <TopRightBar />

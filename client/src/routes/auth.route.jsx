@@ -10,11 +10,9 @@ const authRoutes = (
   <>
     <Route path="/auth/callback" element={<AuthCallback />} />
     <Route path="/auth/:type" element={<Login />} />
-    <Route path="/Error/:type" element={<ErrorPage />} />
-    <Route path="/success/:type" element={<SuccessPage />} />
     <Route path="/getEmail" element={<GetEmail />} />
     <Route path="/resetPassword" element={<ResetPassword />} />
-    <Route path="*" element={<h1> page not found!!!</h1>} />
+  
   </>
 );
 
