@@ -1,5 +1,5 @@
 import {themeContext} from "../allContexts.js";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 
 export default function ThemeProvider({children}) {
   const default_theme = "light";
@@ -7,9 +7,7 @@ export default function ThemeProvider({children}) {
 
   const setTheme = (theme) => {
     window.localStorage.setItem("theme", theme);
-
-    document.body.classList.remove(choosenTheme);
-    document.body.classList.add(theme);
+    document.documentElement.dataset.colorMode = theme;
 
     setChoosenTheme(theme);
   };
@@ -21,15 +19,13 @@ export default function ThemeProvider({children}) {
     e.stopPropagation();
     setTheme("light");
   };
-  useEffect(() => {
-    const userTheme = window.localStorage.getItem("theme");
-    if (userTheme) {
-      setChoosenTheme(userTheme);
-      setTheme(userTheme);
-    } else {
-      setTheme(default_theme);
-    }
-  }, []);
+
+
+useLayoutEffect(() => {
+  const userTheme = window.localStorage.getItem("theme");
+  setTheme(userTheme || default_theme);
+}, []);
+
   return (
     <themeContext.Provider
       value={{ choosenTheme, set_to_dark, set_to_light }}

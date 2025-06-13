@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { supabaseService } from "../../services/supabaseClient.js";
-import supabase from "../../services/supabaseClient.js";
+import { supabaseService } from "../../supabaseClient.js";
+import supabase from "../../supabaseClient.js";
 
 const search = Router();
 search.get("/:course", async (req, res) => {

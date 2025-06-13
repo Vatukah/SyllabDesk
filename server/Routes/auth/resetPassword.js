@@ -1,5 +1,5 @@
-import supabase from "../../services/supabaseClient.js";
-import { supabaseService } from "../../services/supabaseClient.js";
+import supabase from "../../supabaseClient.js";
+import { supabaseService } from "../../supabaseClient.js";
 import { Router } from "express";
 
 const resetPassword = Router();

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+     "start": "cross-env NODE_ENV=production node server.js"
   },
   "author": "anupam",
   "license": "ISC",
@@ -16,5 +16,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

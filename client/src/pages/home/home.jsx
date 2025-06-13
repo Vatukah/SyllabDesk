@@ -6,9 +6,14 @@ import heroImg from "../../assets/hero_image.png";
 import "./home.css";
 import { showSuccess } from "../../services/toastify";
 import Loader from "../../components/loader/loader";
+import MarkdownEditor from "../../components/markdownEditor";
+import { useState } from "react";
+import SearchBar from "../../components/searchBar";
 // landing Page
 const Home = () => {
   const number = ["HNBGU", "GEU", "SDSU", "DU", "GEHU", "GEHU"];
+
+  
 
   const handleGetStarted=async()=>{
        
@@ -22,6 +27,7 @@ const Home = () => {
   }
   return (
     <>
+    
       <section className="w-full relative overflow-hidden" id="heroSection">
        
         <div className="h-[40vh] w-full flex flex-col justify-end items-center leading-line-height ">
@@ -67,6 +73,7 @@ const Home = () => {
           revise fast!
         </p>
         <BentoContainer />
+     
       </section>
     </>
   );

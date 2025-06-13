@@ -1,5 +1,17 @@
 import cookieParser from "cookie-parser";
-import "dotenv/config";
+import { config as configDotenv } from "dotenv";
+const envPath = path.resolve(
+  process.cwd(),
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env.development"
+);
+configDotenv({ path: envPath }); // ✅ This is correct
+
+
+// Now you can access your env variables
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("PORT:", process.env.PORT);
+
+
 import express from "express";
 import cors from "cors";
 import auth from "./Routes/auth/auth.js";
@@ -15,6 +27,8 @@ import courses from "./Routes/admin/getCourses.js";
 import getUniversity from "./Routes/catalog/getUniversity.js";
 import getUniversityProgrammes from "./Routes/catalog/getProgrammes.js";
 import userRoute from './Routes/userPersonal/user.route.js'
+
+
 
 
 const app = express();
@@ -86,5 +100,6 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
+  console.log(process.env.NODE_ENV)
   console.log(` Server is running at http://localhost:${PORT}`);
 });

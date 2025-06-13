@@ -1,14 +1,4 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden; /* Prevent unwanted scroll */
- background-color: var(--primary-dark);
- color: var(--text);
- font-family: 'Inter', sans-serif;
 
-}
 
 #root {
   width: 100vw;
@@ -18,24 +8,4 @@ html, body {
   color: var(--text);
 }
 
-body::before {
-  content: "";
-  position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 400px;
-  aspect-ratio: 1/1;
-  background-color:  rgb(var(--accent-light));
-  border-radius: 100%;
-  pointer-events: none; /* Prevents interfering with interactions */
-}
-/* main::-webkit-scrollbar{
-  width: .45rem;
- 
-}
 
-main::-webkit-scrollbar-thumb{
-  width: 100%;
-  background-color: rgb(var(--accent-light));
-  border-radius: var(--radius-lg);
-} */

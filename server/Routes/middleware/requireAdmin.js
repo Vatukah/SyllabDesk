@@ -1,4 +1,4 @@
-import supabase from "../../services/supabaseClient.js";
+import supabase from "../../supabaseClient.js";
 export async function requireAdmin(req, res, next) {
     try {
       const accessToken = req.cookies.access_token;

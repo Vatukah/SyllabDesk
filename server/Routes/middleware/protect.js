@@ -1,5 +1,5 @@
 
-import supabase from "../../services/supabaseClient.js";
+import supabase from "../../supabaseClient.js";
 
 export default async function protect(req, res, next) {
   const token = req.cookies.access_token;

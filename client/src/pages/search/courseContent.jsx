@@ -25,34 +25,6 @@ export default function CourseContent() {
 
   const { initLoading,error } = useInitCourseOutline(courseQuery, queryTopic);
 
-  // useEffect(() => {
-  //   const search = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const res = await fetch(
-  //         `http://localhost:5008/api/search/${courseQuery}?topic=${topic?topic:"Intro C#"}`,
-  //         {
-  //           method: "get",
-  //         }
-  //       );
-
-  //       if (!res.ok) {
-  //         throw new Error("something went wrong");
-  //       }
-  //       const { subjects, chapters, topics, markdown } = await res.json();
-
-  //       setSubject(subjects);
-  //       setChapters(chapters);
-  //       setTopics(topics);
-  //       setMarkdown(markdown);
-  //     } catch (error) {
-  //       console.error(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   search();
-  // }, [courseQuery]);
 
   useEffect(()=>{
   
