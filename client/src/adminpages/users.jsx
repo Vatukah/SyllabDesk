@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import DynamicTable from "../components/dynamicTable";
-import TableSkeleton from "../components/tableSkeleton";
 import { useAdmin } from "../contexts/providers/adminProvider";
 
 export default function Users() {
