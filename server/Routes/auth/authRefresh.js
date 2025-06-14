@@ -1,4 +1,4 @@
-isProduction
+
 
 import { Router } from "express";
 import supabase from "../../supabaseClient.js";
