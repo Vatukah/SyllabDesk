@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Loader from "../components/loader/loader";
 import DynamicTable from "../components/dynamicTable";
 import { useAdmin } from "../contexts/providers/adminProvider";
 
@@ -72,7 +72,7 @@ export default function Users() {
   ];
   const rows = (users, filterText) => {
     const filteredUsers = users?.filter((user) =>
-      user?.username.toLowerCase().includes(filterText.toLowerCase())
+      user?.username?.toLowerCase()?.includes(filterText?.toLowerCase())
     );
 
     return (
@@ -88,7 +88,7 @@ export default function Users() {
     );
   };
 
-  if (loading) return <TableSkeleton rows={8} columns={4} />;
+  if (loading) return <Loader text="fetching users"/>;
   return (
     <section className="p-md">
       <div className="primary-bg shadow-md border border-[rgba(var(--accent-light),0.5)] rounded-md overflow-hidden">
