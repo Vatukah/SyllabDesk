@@ -1,6 +1,7 @@
 import { Router } from "express";
 import supabase from "../../supabaseClient.js";
 import * as userService from "../../services/user.service.js";
+import { isProd } from "../../config.js";
 
 const getSession = Router();
 
@@ -50,13 +51,13 @@ getSession.get("/", async (req, res) => {
         res.cookie("access_token", data.session.access_token, {
           httpOnly: true,
           maxAge: 3600 * 1000,
-          sameSite: "Lax",
+          sameSite: isProd?"none":"lax",
           secure: true,
         });
         res.cookie("refresh_token", data.session.refresh_token, {
           httpOnly: true,
           maxAge: 60 * 60 * 24 * 30 * 1000,
-          sameSite: "Lax",
+         sameSite: isProd?"none":"lax",
           secure: true,
         });
         const {

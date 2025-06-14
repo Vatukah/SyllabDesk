@@ -1,5 +1,8 @@
+
+
 import { Router } from "express";
 import supabase from "../../supabaseClient.js";
+import { isProd } from "../../config.js";
 
 const refreshToken = Router();
 
@@ -26,13 +29,15 @@ refreshToken.get("/refresh", async (req, res) => {
       httpOnly: true, // Ensures client-side JavaScript cannot access the token
       // secure: process.env.NODE_ENV === 'production', // Ensure secure cookies in production
       maxAge: 60 * 60 * 1000, // 1 hour expiration
-      sameSite: "strict",
+      secure: isProd,
+      sameSite: isProd?"none":"Lax",
     });
     res.cookie("refresh_token", data?.session.refresh_token, {
       httpOnly: true, // Ensures client-side JavaScript cannot access the token
       // secure: process.env.NODE_ENV === 'production', // Ensure secure cookies in production
       maxAge: 24 * 60 * 60 * 30 * 1000, // 30 expiration
-      sameSite: "strict",
+      secure: isProd,
+      sameSite: isProd?"none":"Lax",
     });
 
     return res.status(200).json({ message: "Session refreshed successfully" });

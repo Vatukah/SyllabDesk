@@ -56,10 +56,15 @@ export default function UserNav() {
       method: "GET",
       credentials: "include",
     });
-    const logout = await response.json();
+    const data = await response.json();
+
+    if(response.ok){
     setUser(null);
     setIsRightSideBar(false);
-    navigate(logout.redirect);
+    showSuccess(data.message)
+    navigate('/');
+    }
+    
   };
 
   return (

@@ -102,7 +102,7 @@ export default function AddChapter({ onSubmit }) {
       <hr className="text-[var(--bg-blur-color)] my-lg" />
       <div
         className={`${
-          save && form.id
+         isSave && form.id
             ? "opacity-100 pointer-events-auto"
             : "opacity-50 pointer-events-none"
         }`}
