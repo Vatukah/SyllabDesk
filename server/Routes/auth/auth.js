@@ -1,5 +1,6 @@
 import { Router } from "express";
 import supabase from "../../supabaseClient.js";
+import { isProd } from "../../config.js";
 
 const auth = Router();
 
@@ -48,12 +49,14 @@ auth.post("/signin", async (req, res) => {
   res.cookie("access_token", data.session.access_token, {
     httpOnly: true,
     maxAge: 60 * 60 * 1000, // 1 hour
-    sameSite: "Lax",
+    secure: isProd,
+    sameSite: isProd?"none":"Lax",
   });
   res.cookie("refresh_token", data.session.refresh_token, {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 30 * 1000, // 30 day
-    sameSite: "Lax",
+    secure: isProd,
+    sameSite: isProd?"none":"Lax",
   });
 
   res.status(200).json({ user: data.user, message: "successfull Login" });

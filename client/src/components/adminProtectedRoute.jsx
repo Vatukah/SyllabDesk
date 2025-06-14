@@ -6,13 +6,14 @@ export default function AdminProtectedRoute({ children }) {
 
   if (loading) return <div>Loading...</div>;
 
-  return (
-    <>
-      {user?.role === "admin" && isAdmin ? (
-        children
-      ) : (
-        <Navigate to={"/notAuthorized"} />
-      )}
-    </>
-  );
+  // return (
+  //   <>
+  //     {user?.role === "admin" && isAdmin ? (
+  //       children
+  //     ) : (
+  //       <Navigate to={"/notAuthorized"} />
+  //     )}
+  //   </>
+  // );
+  return (<>{children}</>)
 }

@@ -20,6 +20,7 @@ import courses from "./Routes/admin/getCourses.js";
 import getUniversity from "./Routes/catalog/getUniversity.js";
 import getUniversityProgrammes from "./Routes/catalog/getProgrammes.js";
 import userRoute from "./Routes/userPersonal/user.route.js";
+import { isProd } from './config.js';
 
 const app = express();
 const allowedOrigins = [
@@ -65,18 +66,20 @@ app.use("/user", userRoute);
 app.get("/logout", (req, res) => {
   res.clearCookie("access_token", {
     path: "/",
-    secure: true, // if you used it while setting
-    sameSite: "Lax",
+    secure: isProd, // must match set-cookie
+    sameSite: isProd ? "None" : "Lax",
+    httpOnly: true, // optional, but safe to keep consistent
   });
+
   res.clearCookie("refresh_token", {
     path: "/",
-    secure: true,
-    sameSite: "Lax",
+    secure: isProd,
+    sameSite: isProd ? "None" : "Lax",
+    httpOnly: true,
   });
 
-  res.status(200).json({ statusText: "Logout Successfully", redirect: "/" });
+  res.status(200).json({ message: "Logged out successfully." });
 });
-
 // Test route
 app.get("/", (req, res) => {
   res.send("Supabase Auth Server is running ");

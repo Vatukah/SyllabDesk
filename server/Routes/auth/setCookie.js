@@ -1,5 +1,6 @@
 import { Router } from "express";
 import supabase from "../../supabaseClient.js";
+import { isProd } from "../../config.js";
 
 const setCookieRoute = Router();
 
@@ -17,15 +18,15 @@ setCookieRoute.post("/set-cookie", async (req, res) => {
   // Set cookies
   res.cookie("access_token", access_token, {
     httpOnly: true,
-    secure: true,
-    sameSite: "Lax",
+    secure: isProd,
+    sameSite: isProd?"none":"Lax",
     maxAge: 60 * 60 * 1000, // 1 hour
   });
 
   res.cookie("refresh_token", refresh_token, {
     httpOnly: true,
-    secure: true,
-    sameSite: "Lax",
+    secure: isProd,
+    sameSite: isProd?"none":"Lax",
     maxAge: 60 * 60 * 24 * 30 * 1000, // 30 days
   });
 
