@@ -2,6 +2,7 @@ import BentoContainer from "../../components/bentoGrid/bentoGridContainer";
 import University from "../../components/university";
 import heroImg from "../../assets/hero_image.png";
 import "./home.css";
+import UniversityDialog from "../../components/dialogs/universityDialog";
 
 // landing Page
 const Home = () => {
@@ -52,6 +53,7 @@ const Home = () => {
           revise fast!
         </p>
         <BentoContainer />
+   
       </section>
     </>
   );

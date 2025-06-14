@@ -86,7 +86,7 @@ export default function UniversityDialog({ isOpen, close, closeModel }) {
     <dialog
       open={isOpen}
       ref={ref}
-      className=" w-full h-full fixed top-0 left-0 z-30 bg-transparent  md:py-xs"
+      className=" w-full h-[100dvh] fixed top-0 left-0 z-30 bg-transparent  md:py-xs"
     >
       <div className="flex flex-col primary-bg w-full max-w-[800px] h-full md:w-1/2 mx-auto border border-[rgba(var(--accent-light))] md:rounded-md p-xs">
         <div className="flex items-center gap-xs border-b-1 border-gray-400 p-xs">

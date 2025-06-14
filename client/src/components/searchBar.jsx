@@ -44,12 +44,11 @@ export default function SearchBar() {
   }, []);
 
   return (
-    <div className="absolute -top-full md:top-0 left-[50%] w-full md:w-[60%] translate-x-[-50%] z-50 border 
-">
+    <div className="grow-1  z-30 ">
       <div
         className={`${
           isFocus ? "border-[var(--accent)]" : "border-transparent"
-        } hidden md:flex border primary-bg  w-[100%] max-w[800px] mx-auto  items-center rounded-br-full rounded-bl-full overflow-hidden  p-1 transition-[background-color] z-40`}
+        }  flex border primary-bg  w-[70%] max-w[800px] mx-auto  items-center  rounded-full overflow-hidden  p-1 transition-[background-color] z-40`}
       >
         <div
           className="w-12 h-full hover:primary-bg-dark hover:cursor-pointer py-1 rounded-full shrink-0 grow-0"
@@ -82,7 +81,7 @@ export default function SearchBar() {
           </div>
         )}
       </div>
-      <div className="w-fit md:hidden mx-auto">
+      {/* <div className="w-fit md:hidden mx-auto">
         <div
           className="w-12 h-full hover:primary-bg-dark hover:cursor-pointer py-1 rounded-br-full rounded-bl-full shrink-0 grow-0 primary-bg"
           onClick={handleSearch}
@@ -115,7 +114,7 @@ export default function SearchBar() {
        <div className=" primary-bg-blur w-fit mx-auto md:w-full h-xxl  rounded-br-full rounded-bl-full" >
 
        </div>
-      </div>
+      </div> */}
      
     </div>
   );
